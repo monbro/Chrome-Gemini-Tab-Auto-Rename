@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Tab Auto-Rename",
+  "version": "1.4",
+  "description": "Automatically renames your Gemini browser tabs to match the specific chat title for better organization.",
+  "author": "Michael Klein",
+  "homepage_url": "https://github.com/monbro/Chrome-Gemini-Tab-Auto-Rename",
+
+  "permissions": ["scripting"],
+  "host_permissions": ["https://gemini.google.com/*"],
+
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/app*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "offline_enabled": false
+}
