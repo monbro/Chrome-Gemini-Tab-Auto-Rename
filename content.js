@@ -1,11 +1,18 @@
 let currentChatName = ""; 
 
 function updateGeminiTabTitle() {
-    // 1. Suche den aktiven Chat in der Sidebar
-    const selectedConversation = document.querySelector('.conversation.selected');
-    
+    // 1. Conversation ID aus der aktuellen URL extrahieren
+    // Supports: /app/[id] and /u/1/gem/[gemId]/[id]
+    const match = window.location.pathname.match(/(?:\/app\/|\/gem\/[a-f0-9]+\/)([a-f0-9]+)/);
+    if (!match) return;
+
+    const conversationId = match[1];
+
+    // 2. Sidebar-Link finden, dessen href die aktuelle Conversation ID enthält
+    const selectedConversation = document.querySelector(`a[href*="/app/${conversationId}"]`);
+
     if (selectedConversation) {
-        // 2. Finde das Element mit dem Titel-Text
+        // 3. Finde das Element mit dem Titel-Text
         const titleElement = selectedConversation.querySelector('.conversation-title');
         
         if (titleElement) {
